@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище fitness_kpModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="OrderKarina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Number" Type="int" />
+    <Property Name="StartTime" Type="date" />
+    <Property Name="EndTime" Type="date" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="ServiceId" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="ServiceKarina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Count" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="photo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserKarina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="date" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_OrderKarina_ServiceKarina">
+    <End Role="ServiceKarina" Type="Self.ServiceKarina" Multiplicity="0..1" />
+    <End Role="OrderKarina" Type="Self.OrderKarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceKarina">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderKarina">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderKarina_UserKarina">
+    <End Role="UserKarina" Type="Self.UserKarina" Multiplicity="0..1" />
+    <End Role="OrderKarina" Type="Self.OrderKarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserKarina">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderKarina">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище fitness_kpModelContainer">
+    <EntitySet Name="OrderKarina" EntityType="Self.OrderKarina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceKarina" EntityType="Self.ServiceKarina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserKarina" EntityType="Self.UserKarina" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_OrderKarina_ServiceKarina" Association="Self.FK_OrderKarina_ServiceKarina">
+      <End Role="ServiceKarina" EntitySet="ServiceKarina" />
+      <End Role="OrderKarina" EntitySet="OrderKarina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderKarina_UserKarina" Association="Self.FK_OrderKarina_UserKarina">
+      <End Role="UserKarina" EntitySet="UserKarina" />
+      <End Role="OrderKarina" EntitySet="OrderKarina" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

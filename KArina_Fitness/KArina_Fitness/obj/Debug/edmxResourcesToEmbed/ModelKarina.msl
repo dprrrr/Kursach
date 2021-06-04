@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище fitness_kpModelContainer" CdmEntityContainer="fitness_kpEntities">
+    <EntitySetMapping Name="OrderKarina">
+      <EntityTypeMapping TypeName="fitness_kpModel.OrderKarina">
+        <MappingFragment StoreEntitySet="OrderKarina">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceKarina">
+      <EntityTypeMapping TypeName="fitness_kpModel.ServiceKarina">
+        <MappingFragment StoreEntitySet="ServiceKarina">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserKarina">
+      <EntityTypeMapping TypeName="fitness_kpModel.UserKarina">
+        <MappingFragment StoreEntitySet="UserKarina">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

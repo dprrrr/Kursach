@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fitness_kpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="OrderKarina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Number" Type="Int32" />
+    <Property Name="StartTime" Type="DateTime" Precision="0" />
+    <Property Name="EndTime" Type="DateTime" Precision="0" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ServiceId" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="UserKarina" Relationship="Self.FK_OrderKarina_UserKarina" FromRole="OrderKarina" ToRole="UserKarina" />
+    <NavigationProperty Name="ServiceKarina" Relationship="fitness_kpModel.FK_OrderKarina_ServiceKarina" FromRole="OrderKarina" ToRole="ServiceKarina" />
+  </EntityType>
+  <EntityType Name="ServiceKarina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderKarina" Relationship="fitness_kpModel.FK_OrderKarina_ServiceKarina" FromRole="ServiceKarina" ToRole="OrderKarina" />
+  </EntityType>
+  <EntityType Name="UserKarina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="OrderKarina" Relationship="Self.FK_OrderKarina_UserKarina" FromRole="UserKarina" ToRole="OrderKarina" />
+  </EntityType>
+  <Association Name="FK_OrderKarina_UserKarina">
+    <End Role="UserKarina" Type="Self.UserKarina" Multiplicity="0..1" />
+    <End Role="OrderKarina" Type="Self.OrderKarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserKarina">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderKarina">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="fitness_kpEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="OrderKarina" EntityType="Self.OrderKarina" />
+    <EntitySet Name="ServiceKarina" EntityType="Self.ServiceKarina" />
+    <EntitySet Name="UserKarina" EntityType="Self.UserKarina" />
+    <AssociationSet Name="FK_OrderKarina_UserKarina" Association="Self.FK_OrderKarina_UserKarina">
+      <End Role="UserKarina" EntitySet="UserKarina" />
+      <End Role="OrderKarina" EntitySet="OrderKarina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderKarina_ServiceKarina" Association="fitness_kpModel.FK_OrderKarina_ServiceKarina">
+      <End Role="ServiceKarina" EntitySet="ServiceKarina" />
+      <End Role="OrderKarina" EntitySet="OrderKarina" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_OrderKarina_ServiceKarina">
+    <End Type="fitness_kpModel.ServiceKarina" Role="ServiceKarina" Multiplicity="0..1" />
+    <End Type="fitness_kpModel.OrderKarina" Role="OrderKarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceKarina">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderKarina">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
