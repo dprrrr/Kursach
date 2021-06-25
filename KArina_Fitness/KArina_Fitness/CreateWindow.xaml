@@ -28,7 +28,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Margin="25" Grid.Row="0" Orientation="Vertical">
-                    <Label  Content="Наименование товара"/>
+                    <Label  Content="Наименование услуги"/>
                     <TextBox  Text="{Binding CurrentService.Title}"/>
                     <Label Content="Количество"/>
                     <TextBox  Text="{Binding CurrentService.Count}"/>
@@ -36,8 +36,8 @@
                     <TextBox  Text="{Binding CurrentService.Price}"/>
                 </StackPanel>
             </Grid>
-            <Button Content="Картинка" Margin="7" HorizontalAlignment="left" Click="GetImageButton_Click"></Button>
-            <Button Content="Сохранить" Margin="7" HorizontalAlignment="left" Click="SaveButton_Click"></Button>
+            <Button Content="Выберите файл изображения" Margin="7" Click="GetImageButton_Click"></Button>
+            <Button Content="Сохранить" Margin="7"  Click="SaveButton_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>
