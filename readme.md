@@ -501,6 +501,11 @@ namespace KArina_Fitness
         private void DelOrd_Click(object sender, RoutedEventArgs e)
         {
             var item = ProductListView.SelectedItem as ServiceKarina;
+            if (item == null)
+            {
+                MessageBox.Show("Не выбрана услуга");
+                return;
+            }
             Core.DB.ServiceKarina.Remove(item);
             Core.DB.SaveChanges();
             ServiceList = Core.DB.ServiceKarina.ToList();
@@ -510,6 +515,11 @@ namespace KArina_Fitness
         private void EditOrder_Click(object sender, RoutedEventArgs e)
         {
             var SelectedOrder = ProductListView.SelectedItem as ServiceKarina;
+            if (SelectedOrder == null)
+            {
+                MessageBox.Show("Не выбрана услуга");
+                return;
+            }
             var EditOrderWindow = new CreateWindow(SelectedOrder);
             if ((bool)EditOrderWindow.ShowDialog())
             {
@@ -520,6 +530,7 @@ namespace KArina_Fitness
 
     }
 }
+
 
 
 
@@ -559,17 +570,17 @@ namespace KArina_Fitness
                     <RowDefinition  Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="25" Grid.Row="0" Orientation="Horizontal">
+                <StackPanel Margin="25" Grid.Row="0" Orientation="Vertical">
                     <Label  Content="Наименование товара"/>
-                    <TextBox Width="60" Text="{Binding CurrentService.Title}"/>
+                    <TextBox  Text="{Binding CurrentService.Title}"/>
                     <Label Content="Количество"/>
-                    <TextBox Width="60" Text="{Binding CurrentService.Count}"/>
+                    <TextBox  Text="{Binding CurrentService.Count}"/>
                     <Label Content="Цена"/>
-                    <TextBox Width="60" Text="{Binding CurrentService.Price}"/>
+                    <TextBox  Text="{Binding CurrentService.Price}"/>
                 </StackPanel>
             </Grid>
-            <Button Content="Картинка" Margin="7" HorizontalAlignment="left" Click="GetImageButton_Click"></Button>
-            <Button Content="Сохранить" Margin="7" HorizontalAlignment="left" Click="SaveButton_Click"></Button>
+            <Button Content="Картинка" Margin="7"  Click="GetImageButton_Click"></Button>
+            <Button Content="Сохранить" Margin="7" Click="SaveButton_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>
