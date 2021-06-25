@@ -247,6 +247,11 @@ namespace KArina_Fitness
         private void DelOrd_Click(object sender, RoutedEventArgs e)
         {
             var item = ProductListView.SelectedItem as ServiceKarina;
+            if (item == null)
+            {
+                MessageBox.Show("Не выбрана услуга");
+                return;
+            }
             Core.DB.ServiceKarina.Remove(item);
             Core.DB.SaveChanges();
             ServiceList = Core.DB.ServiceKarina.ToList();
@@ -256,6 +261,11 @@ namespace KArina_Fitness
         private void EditOrder_Click(object sender, RoutedEventArgs e)
         {
             var SelectedOrder = ProductListView.SelectedItem as ServiceKarina;
+            if (SelectedOrder == null)
+            {
+                MessageBox.Show("Не выбрана услуга");
+                return;
+            }
             var EditOrderWindow = new CreateWindow(SelectedOrder);
             if ((bool)EditOrderWindow.ShowDialog())
             {
